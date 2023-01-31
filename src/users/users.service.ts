@@ -13,11 +13,16 @@ export class UsersService {
     return createdUser.save();
   }
 
-  async findAllUsers(): Promise<User[]> {
+  async getUsers(): Promise<User[]> {
     return this.userModel.find().exec();
   }
 
-  async findOneUsers(name: String): Promise<User> {
-    return this.userModel.findOne({name});
+  async getUserById(id: string): Promise<User> {
+    return this.userModel.findById(id);
+  }
+
+  async deleteUserById(id: string) {
+    const deleted = await this.userModel.deleteOne({ _id: id })
+    return "User deleted";
   }
 }

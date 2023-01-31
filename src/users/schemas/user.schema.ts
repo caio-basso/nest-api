@@ -14,6 +14,18 @@ export class User {
   age: number;
 
   @Prop()
+  email: string;
+
+  @Prop()
+  password: string;
+
+  @Prop({default: Date.now})
+  createdAt: Date
+
+  @Prop({default: Date.now})
+  updatedAt: Date
+
+  @Prop()
   shippingAddress: [ShippingAddress]
 
   @Prop()
