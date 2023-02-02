@@ -12,19 +12,22 @@ export class Product {
   sku: string;
 
   @Prop()
-  quantity: number;
+  price: number;
 
   @Prop()
-  images: [];
+  quantity: number;
+
+  @Prop([String])
+  images: string[];
 
   @Prop({default: false})
-  isFeatured: boolean
+  isFeatured: boolean;
 
   @Prop({default: Date.now})
-  createdAt: Date
+  createdAt: Date;
 
   @Prop({default: Date.now})
-  updatedAt: Date
+  updatedAt: Date;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

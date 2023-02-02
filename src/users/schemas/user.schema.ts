@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 import { ShippingAddress } from "./shipping-address.schema";
 import { BillingAddress } from "./billing-address.schema";
+import { Order } from "../../orders/schemas/order.schema";
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -20,16 +21,19 @@ export class User {
   password: string;
 
   @Prop({default: Date.now})
-  createdAt: Date
+  createdAt: Date;
 
   @Prop({default: Date.now})
-  updatedAt: Date
+  updatedAt: Date;
 
   @Prop()
-  shippingAddress: [ShippingAddress]
+  shippingAddress: [ShippingAddress];
 
   @Prop()
-  billingAddress: [BillingAddress]
+  billingAddress: [BillingAddress];
+
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }] })
+  orders: Order[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
