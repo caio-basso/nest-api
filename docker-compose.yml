@@ -25,5 +25,17 @@ services:
       - "27017:27017"
     volumes:
       - dbdata:/data/db
+  traefik:
+    image: traefik:v2.9
+    container_name: traefik
+    network_mode: "host"
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 volumes:
   dbdata:
